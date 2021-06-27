@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div id="app">
+    <div class="text-center">
+        <h1 class="display-4">Welcome</h1>
+        <input value="join group" type="button" id="joinGroup"/>
+        <textarea name="message" id="message"></textarea>
+        <select id="group">
+            <option value="All">Everyone</option>
+            <option value="Myself">Myself</option>
+            <option value="private">Private Group</option>
+        </select>
+        <button class="btn btn-info" id="submitbtn">TEST</button>
+        <div class="notification"></div>
+    </div>
+</div>
+
+
+
+<script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/js/connectionHub.js"></script>
