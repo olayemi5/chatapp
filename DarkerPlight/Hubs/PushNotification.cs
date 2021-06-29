@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using DarkerPlight.ViewModel;
 using Microsoft.AspNetCore.SignalR;
 
 
@@ -22,9 +22,9 @@ namespace DarkerPlight.Hubs
             return Clients.Caller.SendAsync("RecieveMessage", message);
         }
 
-        public Task SendMessageToUser(string connectionId, string message, string senderId) 
+        public Task SendMessageToUser(string connectionId, string message, string senderId,string username) 
         {
-            return Clients.Client(connectionId).SendAsync("RecieveMessage", message,senderId);
+            return Clients.Client(connectionId).SendAsync("RecieveMessage", message,senderId, username);
         }
 
         public Task JoinGroup(string groupName)
@@ -41,13 +41,13 @@ namespace DarkerPlight.Hubs
 
         public override async Task OnConnectedAsync()
         {
-            await Clients.All.SendAsync("UserConnected", Context.ConnectionId);
+            await Clients.All.SendAsync("UserConnected", Context.ConnectionId, CredentialsVm.Username);
             await base.OnConnectedAsync();
         }
 
         public override async Task OnDisconnectedAsync(Exception exception)
         {
-            await Clients.All.SendAsync("UserDisconnected", Context.ConnectionId);
+            await Clients.All.SendAsync("UserDisconnected", Context.ConnectionId, CredentialsVm.Username);
             await base.OnDisconnectedAsync(exception);
         }
     }

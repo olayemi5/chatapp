@@ -9,7 +9,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using DarkerPlight.Persistence.Interface;
+using DarkerPlight.Persistence.Implementation;
+using Microsoft.EntityFrameworkCore;
+using DarkerPlight.Persistence;
 
 namespace DarkerPlight
 {
@@ -26,7 +29,12 @@ namespace DarkerPlight
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            
+            services.AddDbContext<AppDbContext>(dbContextOption => dbContextOption.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddSignalR();
+
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IChatRepository, ChatRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -57,7 +65,7 @@ namespace DarkerPlight
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=ChatRoom}/{action=Chat}/{id?}");
+                    pattern: "{controller=ChatRoom}/{action=ChatDashboard}/{id?}");
             });
         }
     }

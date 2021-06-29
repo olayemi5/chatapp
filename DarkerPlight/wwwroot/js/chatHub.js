@@ -1,11 +1,14 @@
 ﻿var app = new Vue({
     el: '#app',
     data: {
+        userDetails:null,
         contactList: [],
         connectionId: '',
         sentMessages: [],
+        username:'',
         recievedMessages: [],
         staticUser: null,
+        staticUsername: null,
         senderId: null,
         titleChange: null,
         errorMessage: '',
@@ -13,9 +16,10 @@
         chatHeaderMsg:'Chat with an anonymous user and connect'
     },
     methods: {
-        getConnectionString: function (connectionId) {
+        getConnectionString: function (connectionId,username) {
             var self = this;
             self.staticUser = connectionId;
+            self.staticUsername = username;
             self.chatHeaderMsg = "Chat with user"
             var selector, elems, makeActive;
 
@@ -35,7 +39,7 @@
            var message = document.getElementById("message").value;
            if (self.staticUser && message != '') {
                var senderId = self.connectionId;
-               connection.invoke("SendMessageToUser", self.staticUser, message, senderId).catch(function (err) {
+               connection.invoke("SendMessageToUser", self.staticUser, message, senderId, self.username).catch(function (err) {
                    return console.error(err.toString());
                });
                var time = getCurrentDateTime();
@@ -57,7 +61,24 @@
                self.errorMessage="Select user you want to message";
            }
         }, 
+        getDetails: function () {
+            var self = this;
+            self.username =  $('#username').val();
+            axios.get('/api/apphub/details/' + self.username)
+                .then(function (response) {
+                    if (response.data) {
+                        self.userDetails = response.data;
+                        console.log(self.userDetails);
+                    }
+                })
+                .catch(function (error) {
+                    bootbox.alert('Unable to details')
+                })
+        }
     },
+    created() {
+        this.getDetails();
+    }
 }); 
 
 "use strict";
@@ -85,7 +106,7 @@ function getCurrentDateTime() {
     return today;
 }
 
-connection.on("RecieveMessage", function (message, senderId ) {
+connection.on("RecieveMessage", function (message, senderId,username) {
     app.$data.staticUser = senderId;
     console.log(message);
     var time = getCurrentDateTime();
@@ -102,7 +123,7 @@ connection.on("RecieveMessage", function (message, senderId ) {
                     </div>
                          `);
     //change chat title
-    app.$data.titleChange = `1 New message from ${senderId}`;
+    app.$data.titleChange = `1 New message from ${username}`;
   
 
     //message notification sound
@@ -113,7 +134,10 @@ connection.on("RecieveMessage", function (message, senderId ) {
         app.$data.contactList.push({
             image: "https://static.turbosquid.com/Preview/001214/650/2V/boy-cartoon-3D-model_D.jpg",
             connection: senderId,
-            class:"active"
+            class: "active",
+            username: username,
+            lastLogin: "Online",
+            online: true
         })
     }
 });
@@ -123,20 +147,44 @@ window.onfocus = function () {
 }; 
 
 
-connection.on("UserConnected", function (connectionId) {
+connection.on("UserConnected", function (connectionId,username) {
     if (connectionId != this.connectionId) {
+        var status;
+        if (app.$data.userDetails.isActive == true) {
+            status = "Onilne";
+        }
+        else
+        {
+            status = "Last login is " + app.$data.lastLogin;
+        }
+
+        app.$data.contactList = app.$data.contactList.filter(peer => peer.username != username);
+
         app.$data.contactList.push({
             image: "https://static.turbosquid.com/Preview/001214/650/2V/boy-cartoon-3D-model_D.jpg",
             connection: connectionId,
+            username: username,
+            lastLogin: status,
+            online:true
         })
+
+        console.log(app.$data.contactList);
     }
     else {
         app.$data.connectionId = connectionId;
     }
 });
 
-connection.on("UserDisconnected", function (connectionId) {
-    app.$data.contactList = app.$data.contactList.filter(peer => peer.connection != connectionId);
+connection.on("UserDisconnected", function (connectionId, username) {
+    var time = getCurrentDateTime();
+    for (var i in app.$data.contactList) {
+        if (app.$data.contactList[i].connection == connectionId) {
+            app.$data.contactList[i].online = false;
+            app.$data.contactList[i].lastLogin = "Last seen "+time;
+            break; //Stop this loop, we found it!
+        }
+    }
+   // app.$data.contactList = app.$data.contactList.filter(peer => peer.connection != connectionId);
 });
 
 connection.start().catch(function (err) {

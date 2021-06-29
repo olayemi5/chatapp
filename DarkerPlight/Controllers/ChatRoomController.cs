@@ -8,8 +8,9 @@ namespace DarkerPlight.Controllers
 {
     public class ChatRoomController : Controller
     {
-        public IActionResult Chat()
+        public IActionResult Chat(string username)
         {
+            ViewBag.Username = username;
             return View();
         }
         

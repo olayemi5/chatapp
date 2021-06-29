@@ -25,6 +25,9 @@
 </style>
 
 <div id="app" class="container-fluid h-200">
+    <!--UserName-->
+    <input type="text" id="username" hidden name="name" value="@ViewBag.Username" />
+
     <!--create dynamic titles-->
     <title v-if="titleChange != null">{{titleChange}}</title>
     <title v-else>Chat</title>
@@ -47,20 +50,21 @@
                     </div>
                 </div>
                 <div class="card-body contacts_body">
-                    <p class="text-center text-white"><b>Connection Id is {{connectionId}}</b></p>
+                    <p class="text-center text-white"> Welcome Anonymous <b> {{username}}</b></p>
                     <div v-if="contactList.length == 0">
                         <p class="text-info text-center"><small><i>Hello there is no friend available for chat wait a while...</i></small></p>
                     </div>
                     <ui class="contacts">
-                        <li v-on:click="getConnectionString(contact.connection)" v-bind:class="contact.class" v-for="contact in contactList" style="cursor:pointer" id="contactList">
+                        <li v-on:click="getConnectionString(contact.connection,contact.username)" v-bind:class="contact.class" v-for="contact in contactList" style="cursor:pointer" id="contactList">
                             <div id="group" class="d-flex bd-highlight">
                                 <div class="img_cont">
                                     <img v-bind:src="contact.image" class="rounded-circle user_img">
-                                    <span class="online_icon online"></span>
+                                    <span v-if="contact.online == true" class="online_icon online"></span>
+                                    <span v-else class="online_icon offline"></span>
                                 </div>
                                 <div class="user_info">
-                                    <span id="connectedUser">{{contact.connection}}</span>
-                                    <p>Rashid left 50 mins ago</p>
+                                    <span id="connectedUser">{{contact.username}}</span>
+                                    <p>{{contact.lastLogin}}</p>
                                 </div>
                             </div>
                         </li>
@@ -79,7 +83,7 @@
                             <span class="online_icon"></span>
                         </div>
                         <div class="user_info">
-                            <span>{{chatHeaderMsg}} {{staticUser}}</span>
+                            <span>{{chatHeaderMsg}} {{staticUsername}}</span>
                             <p>1767 Messages</p>
                         </div>
                         <div class="video_cam">
