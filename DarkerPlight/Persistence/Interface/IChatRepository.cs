@@ -8,7 +8,8 @@ namespace DarkerPlight.Persistence.Interface
 {
     public interface IChatRepository
     {
-        Task<bool> Add(IChatRepository userChats);
-        Task<Chat> Get();
+        Task<bool> Add(Chat userChats);
+        Task<List<Chat>> Get();
+        List<Chat> Get(string userIdOne, string userIdTwo);
     }
 }

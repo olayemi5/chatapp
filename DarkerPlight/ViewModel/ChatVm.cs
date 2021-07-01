@@ -1,20 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace DarkerPlight.DataModels
+namespace DarkerPlight.ViewModel
 {
-    [Table("Chats_tbl")]
-    public class Chat
+    public class ChatVm
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string ChatId { get; set; }
         public string Message { get; set; }
         public string UserIdOne { get; set; }
         public string UserIdTwo { get; set; }
-        public DateTime ChatTime { get; set; }
+        public string ChatTime { get; set; }
         public string Recipient { get; set; }
     }
 }

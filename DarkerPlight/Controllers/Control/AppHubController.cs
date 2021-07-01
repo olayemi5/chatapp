@@ -39,11 +39,45 @@ namespace DarkerPlight.Controllers.Control
         }
         
         [HttpPost("sendmessage")]
-        public IActionResult SendMessage(Chat chatDetails)
+        public async Task<IActionResult> SendMessage(Chat chatDetails)
         {
-            return Ok();
+            if (ModelState.IsValid)
+            {
+                chatDetails.ChatTime = DateTime.Now;
+                var result = await chatRepository.Add(chatDetails);
+                if (result)
+                {
+                    return Ok(result);
+                }
+                else
+                    return BadRequest();
+            }
+            else
+                return BadRequest();
+
         }
 
+        [HttpGet("getmessage")]
+        public IActionResult GetMessage(string userIdOne, string userIdTwo)
+        {
+            var response =  chatRepository.Get(userIdOne, userIdTwo);
+            var message = new  List<ChatVm>();
+            foreach (var item in response)
+            {
+                var result = new ChatVm() 
+                {
+                   Message = item.Message,
+                   Recipient = item.Recipient,
+                   UserIdOne = item.UserIdOne,
+                   UserIdTwo = item.UserIdTwo,
+                   ChatTime = item.ChatTime.ToString("MMMM dd hh:mm tt"),
+                   ChatId = item.ChatId
+                 };
+
+                message.Add(result);
+            }
+            return Ok(message);
+        }
 
         [HttpPost("authenticate")]
         public async Task<IActionResult> Authenticate(UserLoginVm authenticationDetails)

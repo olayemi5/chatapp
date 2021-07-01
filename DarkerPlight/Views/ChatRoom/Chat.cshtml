@@ -22,9 +22,36 @@
     .custom2 {
         font-family: 'Bebas Neue', cursive;
     }
+    #overlay {
+        position: fixed;
+        display: none;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0,0,0,0.5);
+        z-index: 2;
+        cursor: pointer;
+    }
 </style>
 
 <div id="app" class="container-fluid h-200">
+
+    <!--profile overlay-->
+    <div id="overlay" onclick="off()">
+        <div class="card">
+            <div class="card-header bg-info">
+                Profile Page
+            </div>
+            <div class="card-body">
+
+            </div>
+        </div>
+    </div>
+
+
     <!--UserName-->
     <input type="text" id="username" hidden name="name" value="@ViewBag.Username" />
 
@@ -56,7 +83,7 @@
                     </div>
                     <ui class="contacts">
                         <li v-on:click="getConnectionString(contact.connection,contact.username)" v-bind:class="contact.class" v-for="contact in contactList" style="cursor:pointer" id="contactList">
-                            <div id="group" class="d-flex bd-highlight">
+                            <div v-on:click="getUsername(contact.username)" id="group" class="d-flex bd-highlight">
                                 <div class="img_cont">
                                     <img v-bind:src="contact.image" class="rounded-circle user_img">
                                     <span v-if="contact.online == true" class="online_icon online"></span>
@@ -94,7 +121,7 @@
                     <span id="action_menu_btn"><i class="fas fa-ellipsis-v"></i></span>
                     <div class="action_menu">
                         <ul>
-                            <li><i class="fas fa-user-circle"></i> View profile</li>
+                            <li><i class="fas fa-user-circle" onclick="on()"></i> View profile</li>
                             <li><i class="fas fa-users"></i> Add to close friends</li>
                             <li><i class="fas fa-plus"></i> Add to group</li>
                             <li><i class="fas fa-ban"></i> Block</li>
@@ -132,6 +159,15 @@
 <script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
 <script src="~/lib/jquery/dist/jquery.js"></script>
 <script src="~/js/chatHub.js"></script>
+<script>
+    function on() {
+        document.getElementById("overlay").style.display = "block";
+    }
+
+    function off() {
+        document.getElementById("overlay").style.display = "none";
+    }
+</script>
 
 
 
