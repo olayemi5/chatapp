@@ -33,11 +33,16 @@ namespace DarkerPlight
             services.AddDbContext<AppDbContext>(dbContextOption => dbContextOption.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddSignalR();
 
+            services.AddSession(options => {
+                options.IdleTimeout = TimeSpan.FromMinutes(4);//You can set Time   
+            });
+
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IChatRepository, ChatRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        [Obsolete]
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseSignalR(config =>
@@ -56,7 +61,7 @@ namespace DarkerPlight
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseRouting();
 
             app.UseAuthorization();

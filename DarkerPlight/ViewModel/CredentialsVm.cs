@@ -8,5 +8,6 @@ namespace DarkerPlight.ViewModel
     public static class CredentialsVm
     {
         public static string Username { get; set; }
+        public static bool IsProperChannel = false;
     }
 }

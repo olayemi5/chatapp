@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
 
 namespace DarkerPlight.Controllers.Control
@@ -98,11 +99,15 @@ namespace DarkerPlight.Controllers.Control
                     LastLogin = DateTime.Now,
                     RegisteredDate = DateTime.Now,
                 };
+               
                 await userRepository.Add(details);
+                HttpContext.Session.SetString("SessionName", authenticationDetails.Username);
+
                 return Ok(details.Username);
             }
             else
             {
+                HttpContext.Session.SetString("SessionName", authenticationDetails.Username);
                 return Ok(result);
             }
 
