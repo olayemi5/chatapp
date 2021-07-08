@@ -84,7 +84,7 @@
                                      `);
                                     }
                                 }
-
+                                $("#chatMessages").scrollTop($("#chatMessages")[0].scrollHeight);
                             }
                         })
                         .catch(function (error) {
@@ -132,7 +132,7 @@
                                      `);
                                     }
                                 }
-
+                                $("#chatMessages").scrollTop($("#chatMessages")[0].scrollHeight);
                             }
                         })
                         .catch(function (error) {
@@ -185,7 +185,7 @@
                     </div>  
                             `);
                document.getElementById("message").value = "";
-
+              $("#chatMessages").scrollTop($("#chatMessages")[0].scrollHeight);
                //send message to database for persistency
            }
            else {
@@ -242,7 +242,7 @@ connection.on("RecieveMessage", function (message, senderId,username) {
     console.log(message);
     var time = getCurrentDateTime();
     app.$data.messageCount = + 1;
-   
+    
     //change chat title
     app.$data.titleChange = `1 New message from ${username}`;
     app.$data.staticUsername = username;
@@ -250,8 +250,8 @@ connection.on("RecieveMessage", function (message, senderId,username) {
     //message notification sound
     var audio = new Audio('/sound/notification.wav');
     audio.play();
-
     if (app.$data.contactList.filter(e => e.connection === senderId).length === 0) {
+        setTimeout(function () {
         const myNode = document.getElementById("chatMessages");
         while (myNode.firstChild) {
             myNode.removeChild(myNode.lastChild);
@@ -289,19 +289,8 @@ connection.on("RecieveMessage", function (message, senderId,username) {
                             `);
                         }
                     }
-
+                    $("#chatMessages").scrollTop($("#chatMessages")[0].scrollHeight);
                 }
-                $('#chatMessages').append(`
-                        <div  class="d-flex justify-content-start mb-4">
-                            <div class="img_cont_msg">
-                                <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img_msg">
-                            </div>
-                            <div class="msg_cotainer">
-                                ${message}
-                            <span style="width:400px;" class="msg_time text-left">${time}</span>
-                            </div>
-                        </div>
-                `);
             })
             .catch(function (error) {
                 bootbox.alert('Unable to get message')
@@ -315,9 +304,10 @@ connection.on("RecieveMessage", function (message, senderId,username) {
                 online: true,
                 isLoaded: true
             })
-       
+        }, 2000);
     }
     else {
+        setTimeout(function () {
         const myNode = document.getElementById("chatMessages");
         while (myNode.firstChild) {
             myNode.removeChild(myNode.lastChild);
@@ -355,24 +345,16 @@ connection.on("RecieveMessage", function (message, senderId,username) {
                             `);
                         }
                     }
-
+                    $("#chatMessages").scrollTop($("#chatMessages")[0].scrollHeight);
                 }
-                //$('#chatMessages').append(`
-                //        <div  class="d-flex justify-content-start mb-4">
-                //            <div class="img_cont_msg">
-                //                <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img_msg">
-                //            </div>
-                //            <div class="msg_cotainer">
-                //                ${message}
-                //            <span style="width:400px;" class="msg_time text-left">${time}</span>
-                //            </div>
-                //        </div>
-                //`);
             })
             .catch(function (error) {
                 bootbox.alert('Unable to get message')
-        });
+            });
+        }, 2000);
+        $("#chatMessages").scrollTop($("#chatMessages")[0].scrollHeight);
     }
+   
 });
 
 window.onfocus = function () {

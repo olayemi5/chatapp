@@ -101,12 +101,14 @@ namespace DarkerPlight.Controllers.Control
                 };
                
                 await userRepository.Add(details);
+                CredentialsVm.Username = authenticationDetails.Username;
                 HttpContext.Session.SetString("SessionName", authenticationDetails.Username);
 
                 return Ok(details.Username);
             }
             else
             {
+                CredentialsVm.Username = authenticationDetails.Username;
                 HttpContext.Session.SetString("SessionName", authenticationDetails.Username);
                 return Ok(result);
             }
