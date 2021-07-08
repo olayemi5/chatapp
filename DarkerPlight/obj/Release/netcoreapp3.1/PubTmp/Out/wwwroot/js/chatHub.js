@@ -259,10 +259,7 @@ connection.on("RecieveMessage", function (message, senderId,username) {
     //change chat title
     app.$data.titleChange = `1 New message from ${username}`;
     app.$data.staticUsername = username;
-
-    //message notification sound
-    var audio = new Audio('/sound/notification.wav');
-    audio.play();
+   
     if (app.$data.contactList.filter(e => e.connection === senderId).length === 0) {
         setTimeout(function () {
         const myNode = document.getElementById("chatMessages");
@@ -367,7 +364,10 @@ connection.on("RecieveMessage", function (message, senderId,username) {
         }, 2000);
         $("#chatMessages").scrollTop($("#chatMessages")[0].scrollHeight);
     }
-   
+
+    //message notification sound
+    var audio = new Audio('/sound/notification.wav');
+    audio.play();
 });
 
 window.onfocus = function () {

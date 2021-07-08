@@ -64,6 +64,11 @@
         }
           
     }
+    @@media(max-width:414px) {
+        .space{
+            margin-top:6000px;
+        }
+    }
 </style>
 
 <div id="app" class="container-fluid h-200">
@@ -115,7 +120,7 @@
     <!--create dynamic titles-->
     <title v-if="titleChange != null">{{titleChange}}</title>
     <title v-else>Chat</title>
-    <div v-if="errorMessage != ''" class="alert alert-info alert-dismissible fade show" style="margin-top:10px;" role="alert">
+    <div id="error" v-if="errorMessage != ''" class="alert alert-info alert-dismissible fade show" style="margin-top:10px;" role="alert">
         <strong>Notice:</strong> {{errorMessage}}.
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
@@ -157,7 +162,7 @@
             </div>
         </div>
 
-        <div class="col-md-12 col-xl-8 chat col-sm-12 msg pb-3">
+        <div class="col-md-12 col-xl-8 chat col-sm-12 msg">
             <div class="card">
                 <div class="card-header msg_head">
                     <div class="d-flex bd-highlight">
@@ -210,12 +215,12 @@
             </div>
         </div>
     </div>
-    <div class="f_pale m-sm-5" style="margin-top:30px;">
-        <div v-on:click="scrollUp" style="visibility:hidden; position:fixed; bottom:5px; right:0" class="upper">
-            <button class="btn btn-lg" style="border-radius:40px; background-color:#fff; box-shadow:7px 7px 7px rgba(56, 56, 56, 0.19)"><i class="fas fa-arrow-up"></i></button>
+    <div class="space">
+        <div v-on:click="scrollUp" style="visibility:hidden; position:fixed; bottom:-10px; right:0" class="upper">
+            <button  class="btn btn-lg space" style="border-radius:40px; background-color:#fff; box-shadow:7px 7px 7px rgba(56, 56, 56, 0.19)"><i class="fas fa-arrow-up"></i></button>
         </div>
-        <div v-on:click="scrollDown" style="visibility:hidden; position:fixed; bottom:5px; right:0" class="down">
-            <button class="btn btn-lg" style="border-radius:40px; background-color:#fff; box-shadow:7px 7px 7px rgba(56, 56, 56, 0.19)"><i class="fas fa-arrow-down"></i></button>
+        <div v-on:click="scrollDown" style="visibility:hidden; position:fixed; bottom:-10px; right:0" class="down">
+            <button class="btn btn-lg space" style="border-radius:40px; background-color:#fff; box-shadow:7px 7px 7px rgba(56, 56, 56, 0.19)"><i class="fas fa-arrow-down"></i></button>
         </div>
     </div>
     
