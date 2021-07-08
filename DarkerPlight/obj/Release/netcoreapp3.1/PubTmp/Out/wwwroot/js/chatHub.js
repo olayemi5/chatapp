@@ -20,14 +20,17 @@
     methods: {
         getUsername: function () {
             var self = this;
-            
+
         },
-        getConnectionString: function (connectionId,username) {
+        getConnectionString: function (connectionId, username) {
             var self = this;
+            $('html,body').animate({
+                scrollTop: $(".msg").offset().top
+            }, 'slow');
             self.staticUser = connectionId;
             self.staticUsername = username;
             self.chatHeaderMsg = "Chat with user"
-            
+
             //make selected list active
             var selector, elems, makeActive;
 
@@ -145,35 +148,35 @@
         },
         sendMessage: function () {
             var self = this;
-           
+
             var message = document.getElementById("message").value;
             if (self.staticUsername && message != '' || self.staticUsername != null && message != '') {
-               var senderId = self.connectionId;
-               connection.invoke("SendMessageToUser", self.staticUser, message, senderId, self.username).catch(function (err) {
-                   return console.error(err.toString());
-               });
-               var time = getCurrentDateTime();
-               self.messageCount = + 1;
-               var chatDetails = {
-                   message: message,
-                   userIdOne: self.username,
-                   userIdTwo: self.staticUsername,
-                   recipient: self.username
-               }
-               axios({
-                   method: 'post',
-                   url: '/api/apphub/sendmessage',
-                   data: chatDetails
-               })
-                   .then(function (response) {
-                       if (response.data) {
+                var senderId = self.connectionId;
+                connection.invoke("SendMessageToUser", self.staticUser, message, senderId, self.username).catch(function (err) {
+                    return console.error(err.toString());
+                });
+                var time = getCurrentDateTime();
+                self.messageCount = + 1;
+                var chatDetails = {
+                    message: message,
+                    userIdOne: self.username,
+                    userIdTwo: self.staticUsername,
+                    recipient: self.username
+                }
+                axios({
+                    method: 'post',
+                    url: '/api/apphub/sendmessage',
+                    data: chatDetails
+                })
+                    .then(function (response) {
+                        if (response.data) {
 
-                       }
-                   })
-                   .catch(function (err) {
-                       console.log(err);
-                   })
-                 $('#chatMessages').append(`
+                        }
+                    })
+                    .catch(function (err) {
+                        console.log(err);
+                    })
+                $('#chatMessages').append(`
                          <div v-for="message in sentMessages" class="d-flex justify-content-end mb-4">
                         <div class="msg_cotainer_send">
                             ${message}
@@ -184,17 +187,17 @@
                         </div>
                     </div>  
                             `);
-               document.getElementById("message").value = "";
-              $("#chatMessages").scrollTop($("#chatMessages")[0].scrollHeight);
-               //send message to database for persistency
-           }
-           else {
-               self.errorMessage="Select user you want to message";
-           }
-        }, 
+                document.getElementById("message").value = "";
+                $("#chatMessages").scrollTop($("#chatMessages")[0].scrollHeight);
+                //send message to database for persistency
+            }
+            else {
+                self.errorMessage = "Select user you want to message";
+            }
+        },
         getDetails: function () {
             var self = this;
-            self.username =  $('#username').val();
+            self.username = $('#username').val();
             axios.get('/api/apphub/details/' + self.username)
                 .then(function (response) {
                     if (response.data) {
@@ -205,6 +208,16 @@
                 .catch(function (error) {
                     bootbox.alert('Unable to details')
                 })
+        },
+        scrollUp: function () {
+            $('html,body').animate({
+                scrollTop: $(".chat").offset().top
+            }, 'slow');
+        },
+        scrollDown: function () {
+            $('html,body').animate({
+                scrollTop: $(".msg").offset().top
+            }, 'slow');
         }
     },
     created() {
