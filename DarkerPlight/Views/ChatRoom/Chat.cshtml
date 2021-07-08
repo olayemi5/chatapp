@@ -7,20 +7,25 @@
     .contacts li:hover {
         background-color: rgba(0,0,0,0.3) !important;
     }
+
     .active {
         background-color: rgba(0,0,0,0.3);
     }
+
     #welcome {
         background-image: url(https://thumbs.dreamstime.com/b/washed-white-wood-texture-light-wooden-texture-background-washed-white-wood-texture-light-wooden-texture-background-woods-133034133.jpg) !important;
         background-repeat: no-repeat !important;
         background-size: cover !important;
     }
+
     .custom {
         font-family: 'Big Shoulders Stencil Display', cursive;
     }
+
     .custom2 {
         font-family: 'Bebas Neue', cursive;
     }
+
     #overlay {
         position: fixed;
         display: none;
@@ -30,43 +35,50 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background-color: rgba(0,0,0,0.5);
+        background-color: rgba(0, 0, 0, 0.74);
         z-index: 2;
         cursor: pointer;
     }
-   @@media (max-width: 1196px) {
+
+    @@media (max-width: 1196px) {
         .chat {
             height: 300px !important;
         }
+
         .msg {
             height: 300px !important;
             margin-top: 400px;
             margin-bottom: 630px;
         }
     }
+
     @@media (max-width: 454px) {
         .cip1 {
             max-height: 50px !important;
         }
+
         .msg {
             height: 50px !important;
             margin-top: 700px;
             margin-bottom: 630px;
         }
-        .custom{
-            font-size:14px;
+
+        .custom {
+            font-size: 14px;
         }
+
         #titleMsg {
             font-size: 14px;
         }
-        .conver{
-            padding:0;
+
+        .conver {
+            padding: 0;
         }
-          
     }
+
     @@media(max-width:414px) {
-        .space{
-            margin-top:6000px;
+        .space {
+            margin-top: 6000px;
         }
     }
 </style>
@@ -81,7 +93,7 @@
                     <div class="card-header bg-dark">
                         <h2 class="custom text-white"><b>PROFILE PAGE</b></h2>
                     </div>
-                    <div v-if="userDetails != null" class="card-body" style="background-size: cover; background-repeat: no-repeat; background-image: linear-gradient(to bottom, rgba(23, 23, 23, 0.65), rgba(17, 39, 55, 0.69)),url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKh4VPJ0mff-JRAKJjtdZOBdBgllCZR1ZnHg&usqp=CAU);">
+                    <div v-if="userDetails != null" class="card-body" style="background-size: cover; background-repeat: no-repeat; background-image: linear-gradient(to bottom, rgba(6, 0, 179, 0.47), rgba(17, 39, 55, 0.69)),url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKh4VPJ0mff-JRAKJjtdZOBdBgllCZR1ZnHg&usqp=CAU);">
                         <div class="row">
                             <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
@@ -99,6 +111,11 @@
                                 <div class="form-group">
                                     <label class="text-warning"><small><b>STATUS</b></small></label>
                                     <p class="text-white">ONLINE <span class="badge badge-success">0</span></p>
+                                </div>
+                                <hr />
+                                <div class="form-group">
+                                    <label class="text-warning"><small><b>ACCOUNT SPAN</b></small></label><br />
+                                    <button v-on:click="deleteAccount" class="btn btn-outline-danger"><i class="fa fa-eraser"></i> Delete Account</button>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -168,25 +185,22 @@
                     <div class="d-flex bd-highlight">
                         <div class="img_cont">
                             <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img">
-                            <span class="online_icon"></span>
                         </div>
                         <div class="user_info">
                             <span id="titleMsg">{{chatHeaderMsg}} {{staticUsername}}</span>
                             <p>1767 Messages</p>
                         </div>
                         <div class="video_cam">
-                            <span><i class="fas fa-video"></i></span>
-                            <span><i class="fas fa-phone"></i></span>
+                            <span id="action_menu_btn"><i class="fas fa-ellipsis-v"></i></span>
+                            <div class="action_menu">
+                                <ul>
+                                    <li onclick="on()"><i class="fas fa-user-circle"></i> View profile</li>
+                                    <li><i class="fas fa-users"></i> Add to close friends</li>
+                                    <li><i class="fas fa-plus"></i> Add to group</li>
+                                    <li><i class="fas fa-ban"></i> Block</li>
+                                </ul>
+                            </div>
                         </div>
-                    </div>
-                    <span id="action_menu_btn"><i class="fas fa-ellipsis-v"></i></span>
-                    <div class="action_menu">
-                        <ul>
-                            <li onclick="on()"><i class="fas fa-user-circle"></i> View profile</li>
-                            <li><i class="fas fa-users"></i> Add to close friends</li>
-                            <li><i class="fas fa-plus"></i> Add to group</li>
-                            <li><i class="fas fa-ban"></i> Block</li>
-                        </ul>
                     </div>
                 </div>
                 <div class="card-body msg_card_body" id="chatMessages">
@@ -217,15 +231,21 @@
     </div>
     <div class="space">
         <div v-on:click="scrollUp" style="visibility:hidden; position:fixed; bottom:-10px; right:0" class="upper">
-            <button  class="btn btn-lg space" style="border-radius:40px; background-color:#fff; box-shadow:7px 7px 7px rgba(56, 56, 56, 0.19)"><i class="fas fa-arrow-up"></i></button>
+            <button class="btn btn-lg space" style="border-radius:40px; background-color:#fff; box-shadow:7px 7px 7px rgba(56, 56, 56, 0.19)"><i class="fas fa-arrow-up"></i></button>
         </div>
         <div v-on:click="scrollDown" style="visibility:hidden; position:fixed; bottom:-10px; right:0" class="down">
             <button class="btn btn-lg space" style="border-radius:40px; background-color:#fff; box-shadow:7px 7px 7px rgba(56, 56, 56, 0.19)"><i class="fas fa-arrow-down"></i></button>
         </div>
     </div>
-    
-</div>
 
+</div>
+<script>
+    var $ = jQuery = require("jquery");
+    require("bootstrap-sass");
+    var bootbox = require('bootbox');
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
 <script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
 <script src="~/lib/jquery/dist/jquery.js"></script>
 <script>
@@ -242,7 +262,7 @@
         var value = $(document).scrollTop();/* <== here*/
 
         if (value >= 1000) {
-            
+
         }
         else if (value >= 250) {
             $('.upper').css({ "visibility": "visible" });

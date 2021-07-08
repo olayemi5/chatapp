@@ -193,6 +193,9 @@
             }
             else {
                 self.errorMessage = "Select user you want to message";
+                $('html,body').animate({
+                    scrollTop: $("#error").offset().top
+                }, 'slow');
             }
         },
         getDetails: function () {

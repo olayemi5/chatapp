@@ -34,7 +34,7 @@ namespace DarkerPlight
             services.AddSignalR();
 
             services.AddSession(options => {
-                options.IdleTimeout = TimeSpan.FromMinutes(4);//You can set Time   
+                options.IdleTimeout = TimeSpan.FromHours(1);//You can set Time   
             });
 
             services.AddScoped<IUserRepository, UserRepository>();
