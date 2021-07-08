@@ -29,5 +29,10 @@ namespace DarkerPlight.Persistence.Implementation
         {
             return context.Chat.Where(e => e.UserIdOne == userIdOne && e.UserIdTwo == userIdTwo || e.UserIdTwo == userIdOne && e.UserIdOne == userIdTwo).OrderBy(e => e.ChatTime).ToList();
         }
+        public async Task<List<string>> GetMutuals(string userId)
+        {
+            var result = context.Chat.Where(e => e.UserIdOne == userId || e.UserIdTwo == userId).Select(p => p.Recipient).Distinct().ToList();
+            return result;
+        }
     }
 }

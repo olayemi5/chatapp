@@ -17,6 +17,14 @@ namespace DarkerPlight.Persistence.Implementation
         }
         public async Task<bool> Add(User userDetails)
         {
+            var users = context.Users.ToList();
+            foreach (var user in users)
+            {
+                if (userDetails.Username.ToLower() == user.Username.ToLower())
+                {
+                    return false;
+                }
+            }
             await context.Users.AddAsync(userDetails);
             var chk = context.SaveChanges() > 0 ? true : false;
             return chk;
@@ -49,10 +57,17 @@ namespace DarkerPlight.Persistence.Implementation
             return context.Users.ToList();
         }
 
+        
 
-        public Task<bool> Update(User userDetails)
+        public async Task<bool> Update(string username)
         {
-            throw new NotImplementedException();
+            var user = context.Users.FirstOrDefault(e => e.Username == username);
+            if (user != null)
+            {
+                user.LastLogin = DateTime.Now;
+            }
+            context.Update(user);
+            return context.SaveChanges() > 0 ? true : false;
         }
     }
 }

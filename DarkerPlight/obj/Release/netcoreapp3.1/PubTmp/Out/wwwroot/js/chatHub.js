@@ -1,6 +1,7 @@
 ﻿var app = new Vue({
     el: '#app',
     data: {
+        lostConnection:false,
         recievedUser:'',
         isLoaded:false,
         userDetails:null,
@@ -148,7 +149,6 @@
         },
         sendMessage: function () {
             var self = this;
-
             var message = document.getElementById("message").value;
             if (self.staticUsername && message != '' || self.staticUsername != null && message != '') {
                 var senderId = self.connectionId;
@@ -221,6 +221,25 @@
             $('html,body').animate({
                 scrollTop: $(".msg").offset().top
             }, 'slow');
+        },
+        deleteAccount: function () {
+            var self = this;
+            bootbox.confirm({
+                message: "Do you want to delete your account?",
+                buttons: {
+                    confirm: {
+                        label: 'Yes',
+                        className: 'btn-success'
+                    },
+                    cancel: {
+                        label: 'No',
+                        className: 'btn-danger'
+                    }
+                },
+                callback: function (result) {
+                    bootbox.alert("Deletion of account in progress");
+                }
+            });
         }
     },
     created() {
@@ -415,6 +434,7 @@ connection.on("UserDisconnected", function (connectionId, username) {
             break; //Stop this loop, we found it!
         }
     }
+    app.$data.lostConnection = true;
    // app.$data.contactList = app.$data.contactList.filter(peer => peer.connection != connectionId);
 });
 

@@ -10,6 +10,7 @@ namespace DarkerPlight.Persistence.Interface
     {
         Task<bool> Add(Chat userChats);
         Task<List<Chat>> Get();
+        Task<List<string>> GetMutuals(string userId);
         List<Chat> Get(string userIdOne, string userIdTwo);
     }
 }

@@ -38,6 +38,36 @@ namespace DarkerPlight.Controllers.Control
             };
             return Ok(response);
         }
+
+        [HttpPut("updateLastSeen")]
+        public async Task<IActionResult> UpdateLastLogin(string username)
+        {
+            await userRepository.Update(username);
+            return Ok();
+        }
+        
+        [HttpGet("getMutal/{username}")]
+        public async Task<IActionResult> GetMutaulFriends([FromRoute] string username)
+        {
+            var details = await chatRepository.GetMutuals(username);
+            var result = new List<UserChatMutualVm>();
+            foreach (var user in details)
+            {
+                if (user != username)
+                {
+                    var getLastLoggedIn = await userRepository.Get(user);
+                    var mutalDetails = new UserChatMutualVm()
+                    {
+                        Username = user,
+                        LastLogin = getLastLoggedIn.LastLogin.ToShortDateString(),
+                        Image =  "https://static.turbosquid.com/Preview/001214/650/2V/boy-cartoon-3D-model_D.jpg",
+                        IsLoaded = false
+                    };
+                    result.Add(mutalDetails);
+                }
+            }
+            return Ok(result);
+        }
         
         [HttpPost("sendmessage")]
         public async Task<IActionResult> SendMessage(Chat chatDetails)
@@ -100,11 +130,18 @@ namespace DarkerPlight.Controllers.Control
                     RegisteredDate = DateTime.Now,
                 };
                
-                await userRepository.Add(details);
-                CredentialsVm.Username = authenticationDetails.Username;
-                HttpContext.Session.SetString("SessionName", authenticationDetails.Username);
+                var chk = await userRepository.Add(details);
+                if (chk)
+                {
+                    CredentialsVm.Username = authenticationDetails.Username;
+                    HttpContext.Session.SetString("SessionName", authenticationDetails.Username);
 
-                return Ok(details.Username);
+                    return Ok(details.Username);
+                }
+                else
+                {
+                    return BadRequest("Choose another Username");
+                }
             }
             else
             {

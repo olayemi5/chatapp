@@ -13,6 +13,6 @@ namespace DarkerPlight.Persistence.Interface
         Task<User> Get(string userId);
         Task<List<User>> Get();
         Task<bool> Delete(string UserId);
-        Task<bool> Update(User userDetails);
+        Task<bool> Update(string username);
     }
 }
