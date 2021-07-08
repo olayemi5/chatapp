@@ -4,9 +4,6 @@
 
 
 <style>
-    
-
-
     .contacts li:hover {
         background-color: rgba(0,0,0,0.3) !important;
     }
@@ -38,6 +35,35 @@
         z-index: 2;
         cursor: pointer;
     }
+   @@media (max-width: 1196px) {
+        .chat {
+            height: 300px !important;
+        }
+        .msg {
+            height: 300px !important;
+            margin-top: 400px;
+        }
+    }
+
+    @@media (max-width: 454px) {
+        .cip1 {
+            max-height: 50px !important;
+        }
+
+        .msg {
+            height: 50px !important;
+            margin-top: 700px;
+        }
+        .custom{
+            font-size:14px;
+        }
+        #titleMsg {
+            font-size: 14px;
+        }
+        .conver{
+            padding:0;
+        }
+    }
 </style>
 
 <div id="app" class="container-fluid h-200">
@@ -52,7 +78,7 @@
                     </div>
                     <div v-if="userDetails != null" class="card-body" style="background-size: cover; background-repeat: no-repeat; background-image: linear-gradient(to bottom, rgba(23, 23, 23, 0.65), rgba(17, 39, 55, 0.69)),url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKh4VPJ0mff-JRAKJjtdZOBdBgllCZR1ZnHg&usqp=CAU);">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label class="text-warning"><small><b>USERNAME</b></small></label>
                                     <p class="text-white">{{userDetails.username}}</p>
@@ -96,9 +122,8 @@
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
-    <div class="row p-5 pt-2">
-
-        <div class="col-md-5 col-xl-4 chat">
+    <div class="row p-md-5 p-xl-5 p-sm-0 pt-2 conver">
+        <div class="col-md-12 col-sm-12 col-xl-4 chat cip1">
             <div class="card mb-sm-3 mb-md-0 contacts_card">
                 <div class="card-header">
                     <div class="input-group">
@@ -109,7 +134,7 @@
                     </div>
                 </div>
                 <div class="card-body contacts_body">
-                    <p class="text-center text-white"> Welcome Anonymous <b> {{username}}</b></p>
+                    <p class="text-center text-white lip"> Welcome Anonymous <b> {{username}}</b></p>
                     <div v-if="contactList.length == 0">
                         <p class="text-info text-center"><small><i>Hello there is no friend available for chat wait a while...</i></small></p>
                     </div>
@@ -133,7 +158,7 @@
             </div>
         </div>
 
-        <div class="col-md-8 col-xl-8 chat">
+        <div class="col-md-12 col-xl-8 chat col-sm-12 msg">
             <div class="card">
                 <div class="card-header msg_head">
                     <div class="d-flex bd-highlight">
@@ -142,7 +167,7 @@
                             <span class="online_icon"></span>
                         </div>
                         <div class="user_info">
-                            <span>{{chatHeaderMsg}} {{staticUsername}}</span>
+                            <span id="titleMsg">{{chatHeaderMsg}} {{staticUsername}}</span>
                             <p>1767 Messages</p>
                         </div>
                         <div class="video_cam">

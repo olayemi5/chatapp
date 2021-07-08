@@ -1,4 +1,23 @@
-	body,html{
+.msg_card_body::-webkit-scrollbar {
+	width: 20px;
+}
+
+.msg_card_body::-webkit-scrollbar-track {
+	background-color: transparent;
+}
+
+.msg_card_body::-webkit-scrollbar-thumb {
+	background-color: #d6dee1;
+	border-radius: 20px;
+	border: 6px solid transparent;
+	background-clip: content-box;
+}
+
+.msg_card_bod::-webkit-scrollbar-thumb:hover {
+	background-color: #a8bbbf;
+}
+	
+body,html{
 			height: 100%;
 			margin: 0;
 			background: #7F7FD5;

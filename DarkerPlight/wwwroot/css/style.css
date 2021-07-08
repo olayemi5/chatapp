@@ -7,15 +7,15 @@
 }
 
 .msg_card_body::-webkit-scrollbar-thumb {
-	background-color: red;
+	background-color: #d6dee1;
 	border-radius: 20px;
-	border: 6px solid green;
+	border: 6px solid transparent;
 	background-clip: content-box;
 }
 
-	::-webkit-scrollbar-thumb:hover {
-		background-color: #a8bbbf;
-	}
+.msg_card_bod::-webkit-scrollbar-thumb:hover {
+	background-color: #a8bbbf;
+}
 	
 body,html{
 			height: 100%;
