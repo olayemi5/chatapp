@@ -34,7 +34,7 @@ var app = new Vue({
                 }
             })
             .catch(function (err) {
-                console.log(err);
+                alert("Choose another username");
             })
         }
     },

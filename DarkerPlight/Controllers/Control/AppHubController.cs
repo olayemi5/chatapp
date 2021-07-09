@@ -42,8 +42,26 @@ namespace DarkerPlight.Controllers.Control
         [HttpPut("updateLastSeen")]
         public async Task<IActionResult> UpdateLastLogin(string username)
         {
-            await userRepository.Update(username);
+            await userRepository.UpdateLastSeen(username);
             return Ok();
+        }
+        
+        [HttpPost("saveuserphoto")]
+        public async Task<IActionResult> SaveUserPhoto(UserPhotoUpdateVm model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("Invalid Model state");
+            }
+
+            string cleandata = model.Base64ImageData.Replace("data:image/jpeg;base64,", string.Empty);
+            byte[] photo = Convert.FromBase64String(cleandata);
+
+            bool result;
+
+            result = await userRepository.UpdateUserImage(photo,model.Username);
+
+            return Ok(result);
         }
         
         [HttpGet("getMutal/{username}")]

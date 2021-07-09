@@ -1,6 +1,8 @@
 ﻿var app = new Vue({
     el: '#app',
     data: {
+        imageSrc: '',
+        base64ConvertedImage:'',
         lostConnection:false,
         recievedUser:'',
         isLoaded:false,
@@ -254,7 +256,45 @@
                     bootbox.alert("Deletion of account in progress");
                 }
             });
-        }
+        },
+        onChangePhoto: function (event, callback) {
+            var self = this;
+            var image = URL.createObjectURL(event.target.files[0]);
+            self.userDetails.userImage = image;
+            self.toDataURL(image, function (dataURL) {
+                var userPhoto = {
+                    base64ImageData: dataURL,
+                    username: self.username
+                };
+                axios({
+                    method: 'post',
+                    url: '/api/apphub/saveuserphoto',
+                    data: userPhoto
+                })
+                    .then(function (response) {
+                        alert("Photo saved!");
+                    })
+                    .catch(function (error) {
+                        bootbox.alert('Error Saving photo')
+                    })
+            });
+           
+        },
+        toDataURL: function (src, callback) {
+            var xhttp = new XMLHttpRequest();
+
+            xhttp.onload = function () {
+                var fileReader = new FileReader();
+                fileReader.onloadend = function () {
+                    callback(fileReader.result)
+                };
+                fileReader.readAsDataURL(xhttp.response);
+            };
+
+            xhttp.responseType = 'blob';
+            xhttp.open('GET', src, true);
+            xhttp.send();
+        },
     },
     created() {
         this.getDetails();

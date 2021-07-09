@@ -212,6 +212,20 @@
                     bootbox.alert('Unable to details')
                 })
         },
+        getMutuals: function () {
+            var self = this;
+            self.username = $('#username').val();
+            axios.get('/api/apphub/getMutal/' + self.username)
+                .then(function (response) {
+                    if (response.data) {
+                        self.staticUser = '';
+                        self.contactList = response.data;
+                    }
+                })
+                .catch(function (error) {
+                    bootbox.alert('Unable to details')
+                })
+        },
         scrollUp: function () {
             $('html,body').animate({
                 scrollTop: $(".chat").offset().top
@@ -244,6 +258,7 @@
     },
     created() {
         this.getDetails();
+        this.getMutuals();
     }
 }); 
 
@@ -436,6 +451,16 @@ connection.on("UserDisconnected", function (connectionId, username) {
     }
     app.$data.lostConnection = true;
    // app.$data.contactList = app.$data.contactList.filter(peer => peer.connection != connectionId);
+
+    axios.put('/api/apphub/updateLastSeen?username='+username)
+        .then(function (response) {
+            if (response.data) {
+                console.log("Last seen updated!");
+            }
+        })
+        .catch(function (error) {
+            console.log('Unable to update last seen');
+        });
 });
 
 connection.start().catch(function (err) {
