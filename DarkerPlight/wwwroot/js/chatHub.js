@@ -278,7 +278,7 @@
                         bootbox.alert('Error Saving photo')
                     })
             });
-           
+            self.getDetails();
         },
         toDataURL: function (src, callback) {
             var xhttp = new XMLHttpRequest();

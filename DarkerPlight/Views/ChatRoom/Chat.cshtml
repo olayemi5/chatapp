@@ -95,7 +95,7 @@
                         <span class="custom text-white text-left pull-left" style="font-size:22px"><b>PROFILE PAGE</b></span>
                     </div>
                     <div v-if="userDetails != null" class="card-body" style="background-size: cover; background-repeat: no-repeat; background-image: linear-gradient(to bottom, rgba(6, 0, 179, 0.47), rgba(17, 39, 55, 0.69)),url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKh4VPJ0mff-JRAKJjtdZOBdBgllCZR1ZnHg&usqp=CAU);">
-                        <div class="row">
+                        <div class="row" style="overflow-y:scroll; max-height:700px">
                             <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label class="text-warning"><small><b>USERNAME</b></small></label>
@@ -120,7 +120,7 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <img  id="OpenImgUpload" class="img-thumbnail order-0" width="150" height="150" v-bind:src="'data:image/jpeg;base64,'+ userDetails.userImage"/>
+                                <img  id="OpenImgUpload" class="img-thumbnail order-0" width="100" height="100" v-bind:src="'data:image/jpeg;base64,'+ userDetails.userImage"/>
                                 <input @@change="onChangePhoto($event)" accept=".jpg, .jpeg" type="file" id="imgupload" name="name" value="" />
                             </div>
                         </div>
