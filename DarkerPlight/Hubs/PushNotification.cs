@@ -38,7 +38,6 @@ namespace DarkerPlight.Hubs
         }
 
 
-
         public override async Task OnConnectedAsync()
         {
             await Clients.All.SendAsync("UserConnected", Context.ConnectionId, CredentialsVm.Username);

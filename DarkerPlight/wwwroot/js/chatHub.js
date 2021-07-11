@@ -25,8 +25,15 @@
             var self = this;
 
         },
-        getConnectionString: function (connectionId, username) {
+        getConnectionString: function (connectionId, username,online) {
             var self = this;
+            if (online === false) {
+                connection.on("UserConnected", function (connectionId, username) {
+                    console.log("registered");
+                    console.log(connectionId);
+                });
+            }
+            
             $('html,body').animate({
                 scrollTop: $(".msg").offset().top
             }, 'slow');
@@ -259,6 +266,7 @@
         },
         onChangePhoto: function (event, callback) {
             var self = this;
+            var userInput = document.getElementById('OpenImgUpload');
             var image = URL.createObjectURL(event.target.files[0]);
             self.userDetails.userImage = image;
             self.toDataURL(image, function (dataURL) {
@@ -337,7 +345,7 @@ connection.on("RecieveMessage", function (message, senderId,username) {
     app.$data.titleChange = `1 New message from ${username}`;
     app.$data.staticUsername = username;
    
-    if (app.$data.contactList.filter(e => e.connection === senderId).length === 0) {
+    if (app.$data.contactList.filter(e => e.username === username).length === 0) {
         setTimeout(function () {
         const myNode = document.getElementById("chatMessages");
         while (myNode.firstChild) {
@@ -377,12 +385,16 @@ connection.on("RecieveMessage", function (message, senderId,username) {
                         }
                     }
                     $("#chatMessages").scrollTop($("#chatMessages")[0].scrollHeight);
+                    $('html,body').animate({
+                        scrollTop: $(".msg").offset().top
+                    }, 'slow');
                 }
             })
             .catch(function (error) {
                 bootbox.alert('Unable to get message')
             })
-            app.$data.contactList.push({
+
+            var array = {
                 image: "https://static.turbosquid.com/Preview/001214/650/2V/boy-cartoon-3D-model_D.jpg",
                 connection: senderId,
                 class: "active",
@@ -390,10 +402,23 @@ connection.on("RecieveMessage", function (message, senderId,username) {
                 lastLogin: "Online",
                 online: true,
                 isLoaded: true
-            })
+            }
+            app.$data.contactList.unshift(array);
+
         }, 2000);
     }
     else {
+        app.$data.contactList = app.$data.contactList.filter(peer => peer.username != username);
+        var array = {
+            image: "https://static.turbosquid.com/Preview/001214/650/2V/boy-cartoon-3D-model_D.jpg",
+            connection: senderId,
+            class: "active",
+            username: username,
+            lastLogin: "Online",
+            online: true,
+            isLoaded: true
+        }
+        app.$data.contactList.unshift(array);
         setTimeout(function () {
         const myNode = document.getElementById("chatMessages");
         while (myNode.firstChild) {
@@ -440,6 +465,9 @@ connection.on("RecieveMessage", function (message, senderId,username) {
             });
         }, 2000);
         $("#chatMessages").scrollTop($("#chatMessages")[0].scrollHeight);
+        $('html,body').animate({
+            scrollTop: $(".msg").offset().top
+        }, 'slow');
     }
 
     //message notification sound
@@ -464,14 +492,16 @@ connection.on("UserConnected", function (connectionId,username) {
         }
         app.$data.contactList = app.$data.contactList.filter(peer => peer.username != username);
 
-        app.$data.contactList.push({
+        var array = {
             image: "https://static.turbosquid.com/Preview/001214/650/2V/boy-cartoon-3D-model_D.jpg",
             connection: connectionId,
             username: username,
             lastLogin: status,
             online: true,
             isLoaded: false
-        })
+        };
+
+        app.$data.contactList.unshift(array);
        
         console.log(app.$data.contactList);
     }
@@ -492,7 +522,7 @@ connection.on("UserDisconnected", function (connectionId, username) {
     app.$data.lostConnection = true;
    // app.$data.contactList = app.$data.contactList.filter(peer => peer.connection != connectionId);
 
-    axios.put('/api/apphub/updateLastSeen?username='+username)
+    axios.put('/api/apphub/updateLastSeen?username=' + username + '&connectionId=' + connectionId)
         .then(function (response) {
             if (response.data) {
                 console.log("Last seen updated!");

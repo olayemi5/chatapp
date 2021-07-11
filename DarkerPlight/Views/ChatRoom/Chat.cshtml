@@ -162,7 +162,7 @@
                         <p class="text-info text-center"><small><i>Hello there is no friend available for chat wait a while...</i></small></p>
                     </div>
                     <ui class="contacts">
-                        <li v-on:click="getConnectionString(contact.connection,contact.username)" v-bind:class="contact.class" v-for="contact in contactList" style="cursor:pointer" id="contactList">
+                        <li v-on:click="getConnectionString(contact.connection,contact.username,contact.online)" v-bind:class="contact.class" v-for="contact in contactList" style="cursor:pointer" id="contactList">
                             <div v-on:click="getUsername(contact.username)" id="group" class="d-flex bd-highlight">
                                 <div class="img_cont">
                                     <img v-bind:src="contact.image" class="rounded-circle user_img">
@@ -232,10 +232,10 @@
         </div>
     </div>
     <div class="space">
-        <div v-on:click="scrollUp" style="visibility:hidden; position:fixed; bottom:-10px; right:0" class="upper">
+        <div v-on:click="scrollUp" style="visibility:hidden; position:fixed; bottom:-10px; left:0" class="upper">
             <button class="btn btn-lg space" style="border-radius:40px; background-color:#fff; box-shadow:7px 7px 7px rgba(56, 56, 56, 0.19)"><i class="fas fa-arrow-up"></i></button>
         </div>
-        <div v-on:click="scrollDown" style="visibility:hidden; position:fixed; bottom:-10px; right:0" class="down">
+        <div v-on:click="scrollDown" style="visibility:hidden; position:fixed; bottom:-10px; left:0" class="down">
             <button class="btn btn-lg space" style="border-radius:40px; background-color:#fff; box-shadow:7px 7px 7px rgba(56, 56, 56, 0.19)"><i class="fas fa-arrow-down"></i></button>
         </div>
     </div>

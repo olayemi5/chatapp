@@ -8,8 +8,10 @@ namespace DarkerPlight.ViewModel
     public class UserChatMutualVm
     {
         public string Username { get; set; }
+        public string Connection { get; set; }
         public string LastLogin { get; set; }
         public string Image { get; set; }
         public bool IsLoaded { get; set; }
+        public bool Online { get; set; }
     }
 }

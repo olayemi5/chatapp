@@ -40,9 +40,9 @@ namespace DarkerPlight.Controllers.Control
         }
 
         [HttpPut("updateLastSeen")]
-        public async Task<IActionResult> UpdateLastLogin(string username)
+        public async Task<IActionResult> UpdateLastLogin(string username, string connectionId)
         {
-            await userRepository.UpdateLastSeen(username);
+            await userRepository.UpdateLastSeen(username, connectionId);
             return Ok();
         }
         
@@ -79,7 +79,9 @@ namespace DarkerPlight.Controllers.Control
                         Username = user,
                         LastLogin = getLastLoggedIn.LastLogin.ToShortDateString(),
                         Image =  "https://static.turbosquid.com/Preview/001214/650/2V/boy-cartoon-3D-model_D.jpg",
-                        IsLoaded = false
+                        IsLoaded = false,
+                        Online = false,
+                        Connection = getLastLoggedIn.LastConnectionId
                     };
                     result.Add(mutalDetails);
                 }

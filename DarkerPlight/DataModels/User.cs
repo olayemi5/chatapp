@@ -17,5 +17,6 @@ namespace DarkerPlight.DataModels
         public bool IsActive { get; set; }
         public byte[] UserImage { get; set; }
         public DateTime RegisteredDate { get; set; }
+        public string LastConnectionId { get; set; }
     }
 }

@@ -259,6 +259,7 @@
         },
         onChangePhoto: function (event, callback) {
             var self = this;
+            var userInput = document.getElementById('OpenImgUpload');
             var image = URL.createObjectURL(event.target.files[0]);
             self.userDetails.userImage = image;
             self.toDataURL(image, function (dataURL) {
@@ -278,7 +279,7 @@
                         bootbox.alert('Error Saving photo')
                     })
             });
-           
+            self.getDetails();
         },
         toDataURL: function (src, callback) {
             var xhttp = new XMLHttpRequest();
@@ -377,6 +378,9 @@ connection.on("RecieveMessage", function (message, senderId,username) {
                         }
                     }
                     $("#chatMessages").scrollTop($("#chatMessages")[0].scrollHeight);
+                    $('html,body').animate({
+                        scrollTop: $(".msg").offset().top
+                    }, 'slow');
                 }
             })
             .catch(function (error) {
@@ -440,6 +444,9 @@ connection.on("RecieveMessage", function (message, senderId,username) {
             });
         }, 2000);
         $("#chatMessages").scrollTop($("#chatMessages")[0].scrollHeight);
+        $('html,body').animate({
+            scrollTop: $(".msg").offset().top
+        }, 'slow');
     }
 
     //message notification sound

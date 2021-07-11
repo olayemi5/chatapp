@@ -59,12 +59,13 @@ namespace DarkerPlight.Persistence.Implementation
 
         
 
-        public async Task<bool> UpdateLastSeen(string username)
+        public async Task<bool> UpdateLastSeen(string username, string connectionId)
         {
             var user = context.Users.FirstOrDefault(e => e.Username == username);
             if (user != null)
             {
                 user.LastLogin = DateTime.Now;
+                user.LastConnectionId = connectionId;
             }
             context.Update(user);
             return context.SaveChanges() > 0 ? true : false;
