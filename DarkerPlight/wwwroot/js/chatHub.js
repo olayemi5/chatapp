@@ -21,6 +21,14 @@
         chatHeaderMsg:'Chat with an anonymous user and connect'
     },
     methods: {
+        enterGroup: function () {
+            var self = this;
+            connection.invoke("JoinGroup", "PrivateGroup").catch(function (err) {
+                return console.error(err.toString());
+            });
+            event.preventDefault();
+            console.log("create group");
+        },
         getUsername: function () {
             var self = this;
 

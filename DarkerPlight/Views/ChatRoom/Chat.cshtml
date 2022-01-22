@@ -162,6 +162,17 @@
                         <p class="text-info text-center"><small><i>Hello there is no friend available for chat wait a while...</i></small></p>
                     </div>
                     <ui class="contacts">
+                        <li style="cursor:pointer" v-on:click="enterGroup">
+                            <div id="group" class="d-flex bd-highlight">
+                                <div class="img_cont">
+                                    <img src="~/img/anoLog.png" class="rounded-circle user_img">
+                                </div>
+                                <div class="user_info">
+                                    <span id="connectedUser">Stakershare Holder</span>
+                                    <p>Online</p>
+                                </div>
+                            </div>
+                        </li>
                         <li v-on:click="getConnectionString(contact.connection,contact.username,contact.online)" v-bind:class="contact.class" v-for="contact in contactList" style="cursor:pointer" id="contactList">
                             <div v-on:click="getUsername(contact.username)" id="group" class="d-flex bd-highlight">
                                 <div class="img_cont">

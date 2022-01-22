@@ -20,6 +20,11 @@ namespace DarkerPlight.Persistence.Implementation
             return context.SaveChanges() > 0 ? true : false;
         }
 
+        public Task<bool> AddGroupChat(Chat userChats)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<List<Chat>> Get()
         {
             throw new NotImplementedException();
