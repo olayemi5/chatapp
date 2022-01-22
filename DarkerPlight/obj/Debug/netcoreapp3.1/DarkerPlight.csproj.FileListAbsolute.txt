@@ -56,7 +56,6 @@ C:\Users\User\source\repos\DarkerPlight\DarkerPlight\bin\Debug\netcoreapp3.1\run
 C:\Users\User\source\repos\DarkerPlight\DarkerPlight\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.pdb
 C:\Users\User\source\repos\DarkerPlight\DarkerPlight\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
 C:\Users\User\source\repos\DarkerPlight\DarkerPlight\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
-C:\Users\User\source\repos\DarkerPlight\DarkerPlight\obj\Debug\netcoreapp3.1\DarkerPlight.csprojAssemblyReference.cache
 C:\Users\User\source\repos\DarkerPlight\DarkerPlight\obj\Debug\netcoreapp3.1\DarkerPlight.AssemblyInfoInputs.cache
 C:\Users\User\source\repos\DarkerPlight\DarkerPlight\obj\Debug\netcoreapp3.1\DarkerPlight.AssemblyInfo.cs
 C:\Users\User\source\repos\DarkerPlight\DarkerPlight\obj\Debug\netcoreapp3.1\DarkerPlight.csproj.CoreCompileInputs.cache
@@ -64,8 +63,6 @@ C:\Users\User\source\repos\DarkerPlight\DarkerPlight\obj\Debug\netcoreapp3.1\Dar
 C:\Users\User\source\repos\DarkerPlight\DarkerPlight\obj\Debug\netcoreapp3.1\DarkerPlight.RazorAssemblyInfo.cache
 C:\Users\User\source\repos\DarkerPlight\DarkerPlight\obj\Debug\netcoreapp3.1\DarkerPlight.RazorAssemblyInfo.cs
 C:\Users\User\source\repos\DarkerPlight\DarkerPlight\obj\Debug\netcoreapp3.1\staticwebassets\DarkerPlight.StaticWebAssets.Manifest.cache
-C:\Users\User\source\repos\DarkerPlight\DarkerPlight\obj\Debug\netcoreapp3.1\staticwebassets\DarkerPlight.StaticWebAssets.xml
-C:\Users\User\source\repos\DarkerPlight\DarkerPlight\obj\Debug\netcoreapp3.1\scopedcss\bundle\DarkerPlight.styles.css
 C:\Users\User\source\repos\DarkerPlight\DarkerPlight\obj\Debug\netcoreapp3.1\DarkerPlight.TagHelpers.input.cache
 C:\Users\User\source\repos\DarkerPlight\DarkerPlight\obj\Debug\netcoreapp3.1\DarkerPlight.TagHelpers.output.cache
 C:\Users\User\source\repos\DarkerPlight\DarkerPlight\obj\Debug\netcoreapp3.1\DarkerPlight.RazorCoreGenerate.cache
@@ -87,3 +84,5 @@ C:\Users\User\source\repos\DarkerPlight\DarkerPlight\obj\Debug\netcoreapp3.1\Dar
 C:\Users\User\source\repos\DarkerPlight\DarkerPlight\obj\Debug\netcoreapp3.1\DarkerPlight.dll
 C:\Users\User\source\repos\DarkerPlight\DarkerPlight\obj\Debug\netcoreapp3.1\DarkerPlight.pdb
 C:\Users\User\source\repos\DarkerPlight\DarkerPlight\obj\Debug\netcoreapp3.1\DarkerPlight.genruntimeconfig.cache
+C:\Users\User\source\repos\DarkerPlight\DarkerPlight\obj\Debug\netcoreapp3.1\DarkerPlight.csproj.AssemblyReference.cache
+C:\Users\User\source\repos\DarkerPlight\DarkerPlight\obj\Debug\netcoreapp3.1\DarkerPlight.GeneratedMSBuildEditorConfig.editorconfig
