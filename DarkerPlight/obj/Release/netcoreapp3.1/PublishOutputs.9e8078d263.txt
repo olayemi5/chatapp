@@ -12,10 +12,6 @@ C:\Users\User\source\repos\DarkerPlight\DarkerPlight\obj\Release\netcoreapp3.1\P
 C:\Users\User\source\repos\DarkerPlight\DarkerPlight\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\clone.test.js
 C:\Users\User\source\repos\DarkerPlight\DarkerPlight\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\connectionHub.js
 C:\Users\User\source\repos\DarkerPlight\DarkerPlight\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\index.js
-C:\Users\User\source\repos\DarkerPlight\DarkerPlight\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\subtract.js
-C:\Users\User\source\repos\DarkerPlight\DarkerPlight\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\subtract.test.js
-C:\Users\User\source\repos\DarkerPlight\DarkerPlight\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\sum.js
-C:\Users\User\source\repos\DarkerPlight\DarkerPlight\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\sum.test.js
 C:\Users\User\source\repos\DarkerPlight\DarkerPlight\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\lib\axios\axios.js
 C:\Users\User\source\repos\DarkerPlight\DarkerPlight\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\lib\axios\axios.map
 C:\Users\User\source\repos\DarkerPlight\DarkerPlight\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\lib\axios\axios.min.js
