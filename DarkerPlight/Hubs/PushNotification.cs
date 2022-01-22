@@ -34,7 +34,7 @@ namespace DarkerPlight.Hubs
 
         public Task SendMessageToGroup(string groupName, string message, string sendername, string from)
         {
-            return Clients.Groups(groupName).SendAsync("RecieveGroupMessage", message, from, sendername);
+            return Clients.Groups(groupName).SendAsync("RecieveGroupMessage", message, sendername,from );
         }
 
 

@@ -31,6 +31,7 @@
             event.preventDefault();
             console.log("create group");
 
+            self.isGroupLoaded = true;
             self.groupNumber = 1;
 
             $('html,body').animate({
@@ -104,7 +105,9 @@
                     console.log(connectionId);
                 });
             }
-            
+            self.isGroupLoaded = false;
+            self.groupNumber = 0;
+
             $('html,body').animate({
                 scrollTop: $(".msg").offset().top
             }, 'slow');
@@ -420,14 +423,27 @@ function getCurrentDateTime() {
 }
 
 connection.on("RecieveGroupMessage", function (message, username, from) {
-    console.log(from);
-    console.log(message);
-    console.log(username);
+    console.log("entereddded");
+    if (username != app.$data.username) {
+        var audio = new Audio('/sound/notification.wav');
+        audio.play();
+        app.$data.titleChange = `1 group message from ${username}`;
 
-    app.$data.titleChange = `1 group message from ${username}`;
-
-    var audio = new Audio('/sound/notification.wav');
-    audio.play();
+        if (app.$data.isGroupLoaded == true) {
+            var time = getCurrentDateTime();
+            $('#chatMessages').append(`
+                    <div  class="d-flex justify-content-start mb-4">
+                        <div class="img_cont_msg">
+                            <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img_msg">
+                        </div>
+                        <div class="msg_cotainer">
+                            ${message}
+                        <span style="width:400px;" class="msg_time text-left">${time} - messageby ${username}</span>
+                        </div>
+                    </div>
+                        `);
+        }
+    }
 });
 
 connection.on("RecieveMessage", function (message, senderId,username) {
