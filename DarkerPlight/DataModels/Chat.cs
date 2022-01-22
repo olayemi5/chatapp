@@ -17,6 +17,7 @@ namespace DarkerPlight.DataModels
         public DateTime ChatTime { get; set; }
         public bool IsGroup { get; set; }
         public int GroupNumber { get; set; }
+        public string SentBy { get; set; }
         public string Recipient { get; set; }
     }
 }

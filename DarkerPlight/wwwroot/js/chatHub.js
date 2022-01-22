@@ -5,7 +5,8 @@
         groupNumber:0,
         base64ConvertedImage:'',
         lostConnection:false,
-        recievedUser:'',
+        recievedUser: '',
+        isGroupLoaded:false,
         isLoaded:false,
         userDetails:null,
         contactList: [],
@@ -74,7 +75,7 @@
                                        </div>
                                         <div class="msg_cotainer">
                                            ${messages[i].message}
-                                        <span style="width:400px;" class="msg_time text-left">${messages[i].chatTime}</span>
+                                        <span style="width:400px;" class="msg_time text-left">${messages[i].chatTime} - messageby ${messages[i].sentBy}</span>
                                       </div>
                                     </div>
                                      `);
@@ -258,7 +259,8 @@
                 userIdOne: self.username,
                 userIdTwo: self.staticUsername,
                 recipient: self.username,
-                groupNumber: self.groupNumber
+                groupNumber: self.groupNumber,
+                sentBy: self.username
             }
             axios({
                 method: 'post',

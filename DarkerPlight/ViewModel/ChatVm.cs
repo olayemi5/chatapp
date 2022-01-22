@@ -13,5 +13,6 @@ namespace DarkerPlight.ViewModel
         public string UserIdTwo { get; set; }
         public string ChatTime { get; set; }
         public string Recipient { get; set; }
+        public string SentBy { get; set; }
     }
 }

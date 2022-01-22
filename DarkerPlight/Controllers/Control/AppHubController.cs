@@ -144,7 +144,8 @@ namespace DarkerPlight.Controllers.Control
                     UserIdOne = item.UserIdOne,
                     UserIdTwo = item.UserIdTwo,
                     ChatTime = item.ChatTime.ToString("MMMM dd hh:mm tt"),
-                    ChatId = item.ChatId
+                    ChatId = item.ChatId,
+                    SentBy = item.SentBy
                 };
 
                 message.Add(result);
