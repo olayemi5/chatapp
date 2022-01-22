@@ -32,9 +32,9 @@ namespace DarkerPlight.Hubs
             return Groups.AddToGroupAsync(Context.ConnectionId, groupName);
         }
 
-        public Task SendMessageToGroup(string groupName, string message)
+        public Task SendMessageToGroup(string groupName, string message, string sendername, string from)
         {
-            return Clients.Groups(groupName).SendAsync("RecieveMessage", message);
+            return Clients.Groups(groupName).SendAsync("RecieveGroupMessage", message, from, sendername);
         }
 
 

@@ -67,7 +67,7 @@ namespace DarkerPlight.Controllers.Control
         [HttpGet("getMutal/{username}")]
         public async Task<IActionResult> GetMutaulFriends([FromRoute] string username)
         {
-            var details = await chatRepository.GetMutuals(username);
+            var details = chatRepository.GetMutuals(username);
             var result = new List<UserChatMutualVm>();
             foreach (var user in details)
             {
@@ -90,12 +90,12 @@ namespace DarkerPlight.Controllers.Control
         }
         
         [HttpPost("sendmessage")]
-        public async Task<IActionResult> SendMessage(Chat chatDetails)
+        public IActionResult SendMessage(Chat chatDetails)
         {
             if (ModelState.IsValid)
             {
                 chatDetails.ChatTime = DateTime.Now;
-                var result = await chatRepository.Add(chatDetails);
+                var result = chatRepository.Add(chatDetails);
                 if (result)
                 {
                     return Ok(result);
@@ -124,6 +124,28 @@ namespace DarkerPlight.Controllers.Control
                    ChatTime = item.ChatTime.ToString("MMMM dd hh:mm tt"),
                    ChatId = item.ChatId
                  };
+
+                message.Add(result);
+            }
+            return Ok(message);
+        }
+        
+        [HttpGet("getgroupmessage")]
+        public IActionResult GetGroupMessage(int groupNumber)
+        {
+            var response = chatRepository.GetGroupMessage(groupNumber);
+            var message = new List<ChatVm>();
+            foreach (var item in response)
+            {
+                var result = new ChatVm()
+                {
+                    Message = item.Message,
+                    Recipient = item.Recipient,
+                    UserIdOne = item.UserIdOne,
+                    UserIdTwo = item.UserIdTwo,
+                    ChatTime = item.ChatTime.ToString("MMMM dd hh:mm tt"),
+                    ChatId = item.ChatId
+                };
 
                 message.Add(result);
             }
@@ -169,8 +191,6 @@ namespace DarkerPlight.Controllers.Control
                 HttpContext.Session.SetString("SessionName", authenticationDetails.Username);
                 return Ok(result);
             }
-
-            return Ok(result);
         }
 
     }

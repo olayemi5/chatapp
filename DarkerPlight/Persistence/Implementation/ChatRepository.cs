@@ -14,9 +14,9 @@ namespace DarkerPlight.Persistence.Implementation
         {
             this.context = context;
         }
-        public async Task<bool> Add(Chat userChats)
+        public bool Add(Chat userChats)
         {
-             context.Chat.Add(userChats);
+            context.Chat.Add(userChats);
             return context.SaveChanges() > 0 ? true : false;
         }
 
@@ -34,9 +34,15 @@ namespace DarkerPlight.Persistence.Implementation
         {
             return context.Chat.Where(e => e.UserIdOne == userIdOne && e.UserIdTwo == userIdTwo || e.UserIdTwo == userIdOne && e.UserIdOne == userIdTwo).OrderBy(e => e.ChatTime).ToList();
         }
-        public async Task<List<string>> GetMutuals(string userId)
+
+        public List<Chat> GetGroupMessage(int groupNumber)
         {
-            var result = context.Chat.Where(e => e.UserIdOne == userId || e.UserIdTwo == userId).Select(p => p.Recipient).Distinct().ToList();
+            return context.Chat.Where(e => e.GroupNumber == groupNumber).OrderBy(e => e.ChatTime).ToList();
+        }
+
+        public  List<string> GetMutuals(string userId)
+        {
+            var result =  context.Chat.Where(e => e.UserIdOne == userId || e.UserIdTwo == userId).Select(p => p.Recipient).Distinct().ToList();
             return result;
         }
     }

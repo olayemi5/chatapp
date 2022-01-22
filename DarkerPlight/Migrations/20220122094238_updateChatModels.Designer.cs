@@ -4,14 +4,16 @@ using DarkerPlight.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DarkerPlight.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220122094238_updateChatModels")]
+    partial class updateChatModels
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -28,7 +30,7 @@ namespace DarkerPlight.Migrations
                     b.Property<DateTime>("ChatTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("GroupNumber")
+                    b.Property<int>("Group")
                         .HasColumnType("int");
 
                     b.Property<bool>("IsGroup")
