@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "dGWc8jB4LKAWKatgOEpDaNuFEt3fEIGtGgAtyGRdGbWxhEjyKbt5w+4ztSbeOza5Enxj3Lhr4pwMhhFpYRNoJw==",
+  "dgSpecHash": "fGioG+l7yXSHjSWbQbdo1GEoYpWbCvuPBR0n7i3yf50qh5zaw80KoBKnfosaNbkbb19GZNecr219jJHXIdY//Q==",
   "success": true,
   "projectFilePath": "C:\\Users\\User\\source\\repos\\DarkerPlight\\DarkerPlight\\DarkerPlight.csproj",
   "expectedPackageFiles": [
@@ -162,7 +162,7 @@
     "C:\\Users\\User\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512",
-    "C:\\Users\\User\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.21\\microsoft.netcore.app.host.win-x64.3.1.21.nupkg.sha512"
+    "C:\\Users\\User\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.22\\microsoft.netcore.app.host.win-x64.3.1.22.nupkg.sha512"
   ],
   "logs": []
 }

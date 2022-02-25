@@ -580,18 +580,17 @@ connection.on("UserConnected", function (connectionId, username) {
 
 connection.on("UserDisconnected", function (connectionId, username) {
 
-    //connect the user back
-    connection.on("UserConnected", function (connectionId, username) {
-    });
-
-    var time = getCurrentDateTime();
-    for (var i in app.$data.contactList) {
-        if (app.$data.contactList[i].connection == connectionId) {
-            app.$data.contactList[i].online = false;
-            app.$data.contactList[i].lastLogin = "Last seen "+time;
-            break; //Stop this loop, we found it!
-        }
-    }
+    connection.log('Connection closed. Retrying...');
+    setTimeout(function () { connection.start(); }, 5000);
+    
+    //var time = getCurrentDateTime();
+    //for (var i in app.$data.contactList) {
+    //    if (app.$data.contactList[i].connection == connectionId) {
+    //        app.$data.contactList[i].online = false;
+    //        app.$data.contactList[i].lastLogin = "Last seen "+time;
+    //        break; //Stop this loop, we found it!
+    //    }
+    //}
     //app.$data.lostConnection = true;
    // app.$data.contactList = app.$data.contactList.filter(peer => peer.connection != connectionId);
 
